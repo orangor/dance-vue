@@ -1,0 +1,12 @@
+//ES6的语法大多数浏览器依旧不支持,bable可以把ES6转码成ES5语法，这样我们就可以大胆的在项目中使用最新特性了
+//npm i babel-core babel-loader babel-preset-env babel-preset-stage-3 --save-dev
+{
+    "presets": [
+        [
+            "env",
+            {
+                "modules": false
+            }
+        ]
+    ]
+}
