@@ -27,7 +27,9 @@ module.exports = {
 
         alias: {
             //vue配置
-            'vue$': 'vue/dist/vue.esm.js'
+            'vue$': 'vue/dist/vue.esm.js',
+            //备注 import xx from  "@" 还不对，还需要研究
+            //'@': resolve('src')
         }
     },
     plugins: [

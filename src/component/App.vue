@@ -6,9 +6,9 @@
  * @LastEditTime: 2020-06-02 12:59:27
 --> 
 <template>
-  <div id="app">
+  <div id="app" :style="{fontSize:postFontSize+'em'}">
     <h1>{{ msg }}</h1>
-    <div></div>
+    <div>{{message}}</div>
     <div v-for="(item,name,index) in space" :key="item.id">{{item.name}}{{name}}{{index}}</div>
     <div v-for="(item,name,index) in object" :key="name">{{item+name}}:{{index}}</div>
     <img src="../images/dc.jpg" />
@@ -43,22 +43,43 @@
       <option>B</option>
       <option>C</option>
     </select>
-    <select v-model="select">
-      <option v-for="option in options" v-bind="option.value" :key="option.value">{{selected2}}</option>
+    <select v-model="option_v">
+      <option
+        v-for="option in options"
+        v-bind:value="option.value"
+        :key="option.value"
+      >{{option.text}}</option>
     </select>
+    <br />
+    <input v-model="message" placeholder="干掉这一杯" />
+    <br />
+    <textarea v-model.lazy="message" placeholder="相遇在人海"></textarea>
+    <p>Message is :{{message}}</p>
+    <input type="checkbox" v-model="toggle" true-value="yes" false-value="no" />
+    <input type="radio" v-model="pick" v-bind:value="message" />
+    <input v-model.number="age" type="number" />
+    <dance title="title" v-on:enlarge-text="postFontSize += 0.1" v-on:button="postFontSize -= 0.1"></dance>
   </div>
 </template>
 
 <script>
 import getData from "../util";
-
+import dance from "./Dance.vue";
 export default {
   name: "app",
+
+  components: {
+    dance
+  },
   data() {
     return {
+      postFontSize: 1,
+      pick: "相信缘分依然在",
+      option_v: "A",
       selected: "A",
       selected2: "A",
-
+      toggle: "yes",
+      age: 23,
       options: [
         { text: "One", value: "A" },
         { text: "Two", value: "B" },
@@ -68,7 +89,7 @@ export default {
       checkedNames: [],
       checked: true,
       msg: "Welcome to Your Vue.js",
-      message: "Hello Vue.js",
+      message: "别让我一个人醉",
       space: [
         { name: "空间1", id: 1 },
         { name: "空间2", id: 2 },
@@ -126,4 +147,4 @@ export default {
     color: green;
   }
 }
-</style>
+</style> 
