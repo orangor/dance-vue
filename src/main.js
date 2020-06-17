@@ -3,12 +3,13 @@
  * @version:
  * @Author: luohongwen
  * @Date: 2020-05-28 14:56:05
- * @LastEditTime: 2020-06-01 09:06:21
+ * @LastEditTime: 2020-06-11 17:20:15
  */
 import Vue from 'vue';
 import App from './component/App.vue';
-import './style/common.scss';
 
+import './style/common.scss';
+import './dance_vue.js'
 new Vue({
     el: '#app',
     template: '<App/>',
@@ -25,4 +26,5 @@ Vue.component('button-counter', {
 
 new Vue({ el: '#components-demo' })
 var regex = new RegExp('xyz', 'i');
+
 console.log(regex);
