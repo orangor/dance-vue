@@ -3,24 +3,41 @@
  * @version:
  * @Author: luohongwen
  * @Date: 2020-07-17 12:35:35
- * @LastEditTime: 2020-07-30 14:20:02
+ * @LastEditTime: 2020-07-30 15:28:50
  */
 import Vue from 'vue';
 import functions from '../src/sum.js';
 
 import { shallowMount, mount } from '@vue/test-utils'
-import Counter from '../src/component/Counter.vue'
+import Foo from '../src/component/Counter.vue'
 
 describe('Counter.vue', () => {
     it('increments count when button is clicked', async () => {
-        const wrapper = shallowMount(Counter)
+        const wrapper = shallowMount(Foo)
         wrapper.find('button').trigger('click')
         await Vue.nextTick()
         expect(wrapper.find('div').text()).toMatch('1')
     })
 })
+describe('Conter', () => {
+    it('renders a div', () => {
+        const wrapper = mount(Foo)
+        expect(wrapper.contains('div')).toBe(true)
+    })
+})
+describe('Conter', () => {
+    it('renders a div-color', () => {
+        const wrapper = mount(Foo, {
+            propsData: {
+                color: 'red'
+            }
+        })
+        expect(wrapper.props().color).toBe('red')
+    })
+})
+describe('Conter', () => { })
 test('renders correctly', () => {
-    const wrapper = mount(Counter)
+    const wrapper = mount(Foo)
     expect(wrapper.element).toMatchSnapshot()
 })
 

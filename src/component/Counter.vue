@@ -3,7 +3,7 @@
  * @version: 
  * @Author: luohongwen
  * @Date: 2020-07-30 14:11:38
- * @LastEditTime: 2020-07-30 14:11:49
+ * @LastEditTime: 2020-07-30 15:27:54
 --> 
 <template>
     <div>
@@ -14,6 +14,12 @@
 
 <script>
 export default {
+    props: {
+        color: {
+            type: String,
+            default: 'red',
+        },
+    },
     data() {
         return {
             count: 0,
