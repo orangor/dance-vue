@@ -1,0 +1,63 @@
+1: {
+  name: 官方文档,
+  web: "https://jestjs.io/zh-Hans/",
+  安装命令:npm install -D jest babel-jest ,
+  安装依赖: npm install babel-core babel-preset-env regenerator-runtime
+},
+2: {
+  name: 教程,
+  web: "https: //www.jianshu.com/p/70a4f026a0f1"
+},
+3: {
+  name: 安装配置问题,
+  list: [
+  name: 配置问题,
+introduce: {
+      Jest给出了一个错误:“SyntaxError：Unexpected token export”(Jest gives an error: & quot; SyntaxError: Unexpected token export& quot;
+    },
+solve: {
+  web: "https://www.it1352.com/1472948.html",
+  
+  list: [
+    Babel 7: {
+          1: npm install --save - dev @babel/plugin-transform-modules-commonjs,
+          2: {
+            "env": {
+              "test": {
+                "plugins": [
+                  "@babel/plugin-transform-modules-commonjs"
+                ]
+              }
+            }
+          }
+        }
+        Babel 6: {
+          1:npm install --save-dev babel-plugin-transform-es2015-modules-commonjs,
+          2: {
+            "env": {
+              "test": {
+                "plugins": [
+                  "transform-es2015-modules-commonjs"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+4: {
+  运行测试: {
+    command:npm test,
+    introduce: {}
+  },
+  监听运行: {
+    command:npm test-- --watch,
+    introduce:使用--watch 参数可以启动一个监控界面，当文件发生变化时，便会运行相关的测试。
+  }
+  报告测试: {
+    command:npm test-- --coverage,
+    introduce:使用--coverage 参数，测试结束时还会得到一份测试覆盖度报告。
+  }
+}
