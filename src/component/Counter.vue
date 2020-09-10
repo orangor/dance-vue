@@ -3,17 +3,22 @@
  * @version: 
  * @Author: luohongwen
  * @Date: 2020-07-30 14:11:38
- * @LastEditTime: 2020-07-30 15:27:54
+ * @LastEditTime: 2020-08-06 11:41:31
 --> 
 <template>
     <div>
-        {{ count }}
-        <button @click="increment">自增</button>
+        <span class="count">{{ count }}</span>
+        <button @click="increment">Increment</button>
+        <dance title="title"></dance>
     </div>
 </template>
 
 <script>
+import dance from './Dance.vue'
 export default {
+    components: {
+        dance,
+    },
     props: {
         color: {
             type: String,

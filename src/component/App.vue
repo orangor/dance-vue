@@ -3,10 +3,11 @@
  * @version: 
  * @Author: luohongwen
  * @Date: 2020-05-29 15:20:56
- * @LastEditTime: 2020-07-10 15:16:22
+ * @LastEditTime: 2020-09-09 18:55:06
 --> 
 <template>
     <div id="app">
+        <!--
         <h1 :style="{fontSize:postFontSize+'em'}">{{ msg }}</h1>
         <div>{{message}}</div>
         <div v-for="(item,name,index) in space" :key="item.id">{{item.name}}{{name}}{{index}}</div>
@@ -58,13 +59,24 @@
         <input type="checkbox" v-model="toggle" true-value="yes" false-value="no" />
         <input type="radio" v-model="pick" v-bind:value="message" />
         <input v-model.number="age" type="number" />
+        -->
+        <transition>
+            <p v-if="show">Foo</p>
+        </transition>
+
         <dance
             title="title"
             v-on:enlarge-text="postFontSize += 0.1"
             v-on:button="postFontSize -= 0.1"
+            @custom="onCustom"
         ></dance>
+
         <br />
+        <p v-if="emitted">Emitted!</p>
+        <!--
         <dance-form-create></dance-form-create>
+        -->
+        <div id="myChart" class="myChart" :style="{width: '300px', height: '300px'}"></div>
     </div>
 </template>
 
@@ -74,13 +86,16 @@ import dance from './Dance.vue'
 import danceFormCreate from './element/dance-form-create.vue'
 export default {
     name: 'app',
-
+    show: true,
     components: {
         dance,
-        danceFormCreate
+        danceFormCreate,
     },
     data() {
         return {
+            show: true,
+            count: '1',
+            emitted: false,
             optionx: {
                 //行内表单模式
                 inline: false,
@@ -103,7 +118,7 @@ export default {
                 //是否禁用该表单内的所有组件。若设置为 true，则表单内组件上的 disabled 属性不再生效
                 disabled: false,
                 //用于控制该表单内组件的尺寸 medium / small / mini
-                size: undefined
+                size: undefined,
             },
             postFontSize: 1,
             pick: '相信缘分依然在',
@@ -115,7 +130,7 @@ export default {
             options: [
                 { text: 'One', value: 'A' },
                 { text: 'Two', value: 'B' },
-                { text: 'Three', value: 'C' }
+                { text: 'Three', value: 'C' },
             ],
             picked: '',
             checkedNames: [],
@@ -125,53 +140,86 @@ export default {
             space: [
                 { name: '空间1', id: 1 },
                 { name: '空间2', id: 2 },
-                { name: '空间3', id: 3 }
+                { name: '空间3', id: 3 },
             ],
             styleObject: {
                 color: 'red',
-                fontSize: '13px'
+                fontSize: '13px',
             },
             object: {
                 title: 'How to do lists in Vue',
                 author: 'Jane Doe',
-                publishedAt: '2016-04-10'
+                publishedAt: '2016-04-10',
             },
             sets: [
                 [1, 2, 3, 4, 5],
-                [6, 7, 8, 9, 10]
-            ]
+                [6, 7, 8, 9, 10],
+            ],
         }
     },
     created() {
         this.fetchData()
-        console.log('23333')
+    },
+    mounted() {
+        this.drawLine()
     },
     methods: {
+        onCustom() {
+            this.emitted = true
+        },
         async fetchData() {
             const data = await getData()
             this.msg = data
         },
-        even: function(numbers) {
-            return numbers.filter(function(number) {
+        even: function (numbers) {
+            return numbers.filter(function (number) {
                 return number % 2 === 0
             })
         },
         onTex() {
             alert('xxxxx')
-        }
+        },
+
+        drawLine() {
+            // 基于准备好的dom，初始化echarts实例
+            let myChart = this.$echarts.init(document.getElementById('myChart'))
+            // 绘制图表
+            myChart.setOption({
+                title: { text: '在Vue中使用echarts' },
+                tooltip: {},
+                xAxis: {
+                    data: [
+                        '衬衫',
+                        '羊毛衫',
+                        '雪纺衫',
+                        '裤子',
+                        '高跟鞋',
+                        '袜子',
+                    ],
+                },
+                yAxis: {},
+                series: [
+                    {
+                        name: '销量',
+                        type: 'bar',
+                        data: [5, 20, 36, 10, 10, 20],
+                    },
+                ],
+            })
+        },
     },
     computed: {
-        reverseMessage: function() {
-            return this.message
-                .split('')
-                .reverse()
-                .join('')
-        }
-    }
+        reverseMessage: function () {
+            return this.message.split('').reverse().join('')
+        },
+    },
 }
 </script>
 
 <style lang="scss">
+.myChart {
+    background: cadetblue;
+}
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
 

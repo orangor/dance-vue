@@ -3,7 +3,7 @@
  * @version:
  * @Author: luohongwen
  * @Date: 2020-05-28 14:56:05
- * @LastEditTime: 2020-07-10 14:35:08
+ * @LastEditTime: 2020-09-09 18:47:23
  */
 import Vue from 'vue';
 //import VueRouter from 'vue-router'
@@ -12,6 +12,8 @@ import ElementUI from 'element-ui';
 import formCreate, { maker } from '@form-create/element-ui'
 import './style/common.scss';
 import './dance_vue.js'
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 Vue.use(ElementUI);
 Vue.use(formCreate)
 new Vue({
@@ -30,5 +32,7 @@ Vue.component('button-counter', {
 
 new Vue({ el: '#components-demo' })
 var regex = new RegExp('xyz', 'i');
+
+
 
 
